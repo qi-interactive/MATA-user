@@ -2,7 +2,7 @@
     "name": "mata/mata-user",
     "description": "Flexible user registration and authentication module for MATA",
     "keywords": ["yii2", "mata-user", "user management", "mata"],
-    "type": "mata-module",
+    "type": "yii2-extension",
     "license": "MIT",
     "support": {
     },
