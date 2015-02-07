@@ -1,19 +1,19 @@
 <?php
 
 /*
- * This file is part of the Dektrium project.
+ * This file is part of the mata project.
  *
- * (c) Dektrium project <http://github.com/dektrium/>
+ * (c) mata project <http://github.com/mata/>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace dektrium\user\models;
+namespace mata\user\models;
 
-use dektrium\user\Finder;
+use mata\user\Finder;
 use yii\base\Model;
-use dektrium\user\helpers\Password;
+use mata\user\helpers\Password;
 
 /**
  * LoginForm get user's login and password, validates them and logs the user in. If user has been blocked, it adds
@@ -32,10 +32,10 @@ class LoginForm extends Model
     /** @var string Whether to remember the user */
     public $rememberMe = false;
 
-    /** @var \dektrium\user\models\User */
+    /** @var \mata\user\models\User */
     protected $user;
 
-    /** @var \dektrium\user\Module */
+    /** @var \mata\user\Module */
     protected $module;
 
     /** @var Finder */

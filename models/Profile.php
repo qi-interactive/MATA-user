@@ -1,15 +1,15 @@
 <?php
 
 /*
- * This file is part of the Dektrium project.
+ * This file is part of the mata project.
  *
- * (c) Dektrium project <http://github.com/dektrium/>
+ * (c) mata project <http://github.com/mata/>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace dektrium\user\models;
+namespace mata\user\models;
 
 use yii\db\ActiveRecord;
 
@@ -29,7 +29,7 @@ use yii\db\ActiveRecord;
  */
 class Profile extends ActiveRecord
 {
-    /** @var \dektrium\user\Module */
+    /** @var \mata\user\Module */
     protected $module;
 
     /** @inheritdoc */

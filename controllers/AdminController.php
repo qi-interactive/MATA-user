@@ -1,19 +1,19 @@
 <?php
 
 /*
- * This file is part of the Dektrium project.
+ * This file is part of the mata project.
  *
- * (c) Dektrium project <http://github.com/dektrium/>
+ * (c) mata project <http://github.com/mata/>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace dektrium\user\controllers;
+namespace mata\user\controllers;
 
-use dektrium\user\Finder;
-use dektrium\user\models\User;
-use dektrium\user\models\UserSearch;
+use mata\user\Finder;
+use mata\user\models\User;
+use mata\user\models\UserSearch;
 use yii\base\Model;
 use yii\web\Controller;
 use yii\filters\AccessControl;
@@ -25,7 +25,7 @@ use yii\widgets\ActiveForm;
 /**
  * AdminController allows you to administrate users.
  *
- * @property \dektrium\user\Module $module
+ * @property \mata\user\Module $module
  * @author Dmitry Erofeev <dmeroff@gmail.com
  */
 class AdminController extends Controller

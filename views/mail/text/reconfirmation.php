@@ -1,16 +1,16 @@
 <?php
 
 /*
- * This file is part of the Dektrium project.
+ * This file is part of the mata project.
  *
- * (c) Dektrium project <http://github.com/dektrium>
+ * (c) mata project <http://github.com/mata>
  *
  * For the full copyright and license information, please view the LICENSE.md
  * file that was distributed with this source code.
  */
 
 /**
- * @var dektrium\user\models\Token $token
+ * @var mata\user\models\Token $token
  */
 ?>
 <?= Yii::t('user', 'Hello') ?>,

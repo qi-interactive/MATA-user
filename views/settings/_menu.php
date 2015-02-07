@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of the Dektrium project.
+ * This file is part of the mata project.
  *
- * (c) Dektrium project <http://github.com/dektrium>
+ * (c) mata project <http://github.com/mata>
  *
  * For the full copyright and license information, please view the LICENSE.md
  * file that was distributed with this source code.
@@ -11,7 +11,7 @@
 
 use yii\widgets\Menu;
 
-/** @var dektrium\user\models\User $user */
+/** @var mata\user\models\User $user */
 $user = Yii::$app->user->identity;
 $networksVisible = count(Yii::$app->authClientCollection->clients) > 0;
 

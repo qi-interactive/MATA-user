@@ -1,7 +1,7 @@
 <?php
 
-use dektrium\user\models\Token;
-use dektrium\user\models\User;
+use mata\user\models\Token;
+use mata\user\models\User;
 use tests\codeception\_pages\RegistrationPage;
 use yii\helpers\Html;
 

@@ -1,20 +1,20 @@
 <?php
 
 /*
- * This file is part of the Dektrium project.
+ * This file is part of the mata project.
  *
- * (c) Dektrium project <http://github.com/dektrium/>
+ * (c) mata project <http://github.com/mata/>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace dektrium\user\models;
+namespace mata\user\models;
 
-use dektrium\user\Finder;
-use dektrium\user\helpers\Password;
-use dektrium\user\Mailer;
-use dektrium\user\Module;
+use mata\user\Finder;
+use mata\user\helpers\Password;
+use mata\user\Mailer;
+use mata\user\Module;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
@@ -58,13 +58,13 @@ class User extends ActiveRecord implements IdentityInterface
     /** @var string Plain password. Used for model validation. */
     public $password;
 
-    /** @var \dektrium\user\Module */
+    /** @var \mata\user\Module */
     protected $module;
 
-    /** @var \dektrium\user\Mailer */
+    /** @var \mata\user\Mailer */
     protected $mailer;
 
-    /** @var \dektrium\user\Finder */
+    /** @var \mata\user\Finder */
     protected $finder;
 
     /** @inheritdoc */

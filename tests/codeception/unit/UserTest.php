@@ -1,9 +1,9 @@
 <?php
 
-namespace dektrium\user\tests;
+namespace mata\user\tests;
 
 use Codeception\Specify;
-use dektrium\user\models\User;
+use mata\user\models\User;
 use tests\codeception\fixtures\UserFixture;
 use yii\codeception\TestCase;
 use Yii;

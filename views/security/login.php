@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of the Dektrium project.
+ * This file is part of the mata project.
  *
- * (c) Dektrium project <http://github.com/dektrium>
+ * (c) mata project <http://github.com/mata>
  *
  * For the full copyright and license information, please view the LICENSE.md
  * file that was distributed with this source code.
@@ -11,12 +11,12 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use dektrium\user\widgets\Connect;
+use mata\user\widgets\Connect;
 
 /**
  * @var yii\web\View                   $this
- * @var dektrium\user\models\LoginForm $model
- * @var dektrium\user\Module           $module
+ * @var mata\user\models\LoginForm $model
+ * @var mata\user\Module           $module
  */
 
 $this->title = Yii::t('user', 'Sign in');
