@@ -11,7 +11,7 @@
 
 namespace mata\user;
 
-use yii\base\Module as BaseModule;
+use mata\base\Module as BaseModule;
 
 /**
  * This is the main module class for the Yii2-user.

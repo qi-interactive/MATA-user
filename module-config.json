@@ -1,0 +1,6 @@
+{
+    "name": "Users",
+    "description": "User management",
+    "icon" : "/images/module-icon.svg",
+    "version" : "0.9.3-dev"
+}
