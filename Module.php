@@ -91,4 +91,8 @@ class Module extends BaseModule
         'recover/<id:\d+>/<code:\w+>' => 'recovery/reset',
         'settings/<action:\w+>'       => 'settings/<action>'
     ];
+
+    public function getNavigation() {
+        return "user/settings";
+    }
 }

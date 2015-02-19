@@ -18,7 +18,7 @@ use mata\user\Module;
 use yii\authclient\ClientInterface;
 use yii\base\Model;
 use yii\helpers\Url;
-use yii\web\Controller;
+use mata\web\module\Controller;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\ForbiddenHttpException;

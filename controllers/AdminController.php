@@ -15,7 +15,7 @@ use mata\user\Finder;
 use mata\user\models\User;
 use mata\user\models\UserSearch;
 use yii\base\Model;
-use yii\web\Controller;
+use mata\web\module\Controller;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\NotFoundHttpException;

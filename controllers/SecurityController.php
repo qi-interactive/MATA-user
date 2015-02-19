@@ -16,7 +16,7 @@ use mata\user\models\Account;
 use mata\user\models\LoginForm;
 use yii\base\Model;
 use yii\helpers\Url;
-use yii\web\Controller;
+use mata\web\module\Controller;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\authclient\ClientInterface;
@@ -51,19 +51,19 @@ class SecurityController extends Controller
     public function behaviors()
     {
         return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    ['allow' => true, 'actions' => ['login', 'auth'], 'roles' => ['?']],
-                    ['allow' => true, 'actions' => ['logout'], 'roles' => ['@']],
-                ]
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post']
-                ]
-            ]
+        'access' => [
+        'class' => AccessControl::className(),
+        'rules' => [
+        ['allow' => true, 'actions' => ['login', 'auth'], 'roles' => ['?']],
+        ['allow' => true, 'actions' => ['logout'], 'roles' => ['@']],
+        ]
+        ],
+        'verbs' => [
+        'class' => VerbFilter::className(),
+        'actions' => [
+        'logout' => ['post']
+        ]
+        ]
         ];
     }
 
@@ -71,10 +71,10 @@ class SecurityController extends Controller
     public function actions()
     {
         return [
-            'auth' => [
-                'class' => 'yii\authclient\AuthAction',
-                'successCallback' => [$this, 'authenticate'],
-            ]
+        'auth' => [
+        'class' => 'yii\authclient\AuthAction',
+        'successCallback' => [$this, 'authenticate'],
+        ]
         ];
     }
 
@@ -95,7 +95,7 @@ class SecurityController extends Controller
         return $this->render('login', [
             'model'  => $model,
             'module' => $this->module,
-        ]);
+            ]);
     }
 
     /**
@@ -127,7 +127,7 @@ class SecurityController extends Controller
                 'provider'   => $provider,
                 'client_id'  => $clientId,
                 'data'       => json_encode($attributes),
-            ]);
+                ]);
             $account->save(false);
         }
 
@@ -143,8 +143,7 @@ class SecurityController extends Controller
      * @param Model $model
      * @throws \yii\base\ExitException
      */
-    protected function performAjaxValidation(Model $model)
-    {
+    protected function performAjaxValidation(Model $model) {
         if (\Yii::$app->request->isAjax && $model->load(\Yii::$app->request->post())) {
             \Yii::$app->response->format = Response::FORMAT_JSON;
             echo json_encode(ActiveForm::validate($model));

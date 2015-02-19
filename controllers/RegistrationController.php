@@ -16,7 +16,7 @@ use mata\user\models\RegistrationForm;
 use mata\user\models\ResendForm;
 use mata\user\models\User;
 use yii\base\Model;
-use yii\web\Controller;
+use mata\web\module\Controller;
 use yii\filters\AccessControl;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
@@ -154,6 +154,7 @@ class RegistrationController extends Controller
      */
     public function actionResend()
     {
+        sleep(2);
         if ($this->module->enableConfirmation == false) {
             throw new NotFoundHttpException;
         }

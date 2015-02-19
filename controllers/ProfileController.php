@@ -12,7 +12,7 @@
 namespace mata\user\controllers;
 
 use mata\user\Finder;
-use yii\web\Controller;
+use mata\web\module\Controller;
 use yii\filters\AccessControl;
 use yii\web\NotFoundHttpException;
 

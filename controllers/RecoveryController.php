@@ -15,7 +15,7 @@ use mata\user\Finder;
 use mata\user\models\RecoveryForm;
 use mata\user\models\Token;
 use yii\base\Model;
-use yii\web\Controller;
+use mata\web\module\Controller;
 use yii\filters\AccessControl;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
