@@ -93,6 +93,6 @@ class Module extends BaseModule
     ];
 
     public function getNavigation() {
-        return "user/settings";
+        return "/mata-cms/user/settings";
     }
 }
