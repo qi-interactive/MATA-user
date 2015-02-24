@@ -11,7 +11,7 @@
 
 namespace mata\user\models;
 
-use yii\db\ActiveRecord;
+use matacms\db\ActiveRecord;
 
 /**
  * This is the model class for table "profile".
