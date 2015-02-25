@@ -93,6 +93,11 @@ class Module extends BaseModule
     ];
 
     public function getNavigation() {
-        return "/mata-cms/user/settings";
+
+        return [
+            "Your profile" => "/mata-cms/user/settings",
+            "Manage users" => "/mata-cms/user/forgot",
+            "Logout" => "/mata-cms/user/logout"
+        ];
     }
 }

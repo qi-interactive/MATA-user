@@ -57,12 +57,6 @@ class SecurityController extends Controller
         ['allow' => true, 'actions' => ['login', 'auth'], 'roles' => ['?']],
         ['allow' => true, 'actions' => ['logout'], 'roles' => ['@']],
         ]
-        ],
-        'verbs' => [
-        'class' => VerbFilter::className(),
-        'actions' => [
-        'logout' => ['post']
-        ]
         ]
         ];
     }

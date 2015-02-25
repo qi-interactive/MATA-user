@@ -17,7 +17,7 @@ use mata\user\Mailer;
 use mata\user\Module;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
-use yii\db\ActiveRecord;
+use matacms\db\ActiveRecord;
 use yii\log\Logger;
 use yii\web\IdentityInterface;
 
@@ -450,20 +450,22 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /** @inheritdoc */
-    public static function tableName()
-    {
+    public static function tableName() {
         return '{{%user}}';
     }
 
     /** @inheritdoc */
-    public static function findIdentity($id)
-    {
+    public static function findIdentity($id) {
         return static::findOne($id);
     }
 
     /** @inheritdoc */
-    public static function findIdentityByAccessToken($token, $type = null)
-    {
+    public static function findIdentityByAccessToken($token, $type = null) {
         throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
+    }
+
+    public function getLabel() {
+        $profile = $this->getProfile()->one();
+        return  $profile != null && $profile->name != null ?  $profile->name : $this->username;
     }
 }
