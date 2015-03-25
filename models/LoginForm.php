@@ -56,9 +56,9 @@ class LoginForm extends Model
     public function attributeLabels()
     {
         return [
-            'login'      => \Yii::t('user', 'Login'),
-            'password'   => \Yii::t('user', 'Password'),
-            'rememberMe' => \Yii::t('user', 'Remember me next time'),
+        'login'      => \Yii::t('user', 'Username'),
+        'password'   => \Yii::t('user', 'Password'),
+        'rememberMe' => \Yii::t('user', 'Remember me'),
         ];
     }
 
@@ -66,25 +66,25 @@ class LoginForm extends Model
     public function rules()
     {
         return [
-            [['login', 'password'], 'required'],
-            ['login', 'trim'],
-            ['password', function ($attribute) {
-                if ($this->user === null || !Password::validate($this->password, $this->user->password_hash)) {
-                    $this->addError($attribute, \Yii::t('user', 'Invalid login or password'));
+        [['login', 'password'], 'required'],
+        ['login', 'trim'],
+        ['password', function ($attribute) {
+            if ($this->user === null || !Password::validate($this->password, $this->user->password_hash)) {
+                $this->addError($attribute, \Yii::t('user', 'Invalid login or password'));
+            }
+        }],
+        ['login', function ($attribute) {
+            if ($this->user !== null) {
+                $confirmationRequired = $this->module->enableConfirmation && !$this->module->enableUnconfirmedLogin;
+                if ($confirmationRequired && !$this->user->getIsConfirmed()) {
+                    $this->addError($attribute, \Yii::t('user', 'You need to confirm your email address'));
                 }
-            }],
-            ['login', function ($attribute) {
-                if ($this->user !== null) {
-                    $confirmationRequired = $this->module->enableConfirmation && !$this->module->enableUnconfirmedLogin;
-                    if ($confirmationRequired && !$this->user->getIsConfirmed()) {
-                        $this->addError($attribute, \Yii::t('user', 'You need to confirm your email address'));
-                    }
-                    if ($this->user->getIsBlocked()) {
-                        $this->addError($attribute, \Yii::t('user', 'Your account has been blocked'));
-                    }
+                if ($this->user->getIsBlocked()) {
+                    $this->addError($attribute, \Yii::t('user', 'Your account has been blocked'));
                 }
-            }],
-            ['rememberMe', 'boolean'],
+            }
+        }],
+        ['rememberMe', 'boolean'],
         ];
     }
 
