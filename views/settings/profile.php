@@ -10,6 +10,7 @@
  */
 
 use yii\helpers\Html;
+use matacms\widgets\ActiveForm;
 
 /**
  * @var yii\web\View $this
@@ -33,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= Html::encode($this->title) ?>
             </div>
             <div class="panel-body">
-                <?php $form = \yii\widgets\ActiveForm::begin([
+                <?php $form = ActiveForm::begin([
                     'id' => 'profile-form',
                     'options' => ['class' => 'form-horizontal'],
                     'fieldConfig' => [
@@ -53,6 +54,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <?= $form->field($model, 'location') ?>
 
+                <?= $form->field($model, 'Avatar')->media() ?>
+
                 <?= $form->field($model, 'gravatar_email')->hint(\yii\helpers\Html::a(Yii::t('user', 'Change your avatar at Gravatar.com'), 'http://gravatar.com')) ?>
 
                 <?= $form->field($model, 'bio')->textarea() ?>
@@ -63,7 +66,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
                 </div>
 
-                <?php \yii\widgets\ActiveForm::end(); ?>
+                <?php ActiveForm::end(); ?>
             </div>
         </div>
     </div>

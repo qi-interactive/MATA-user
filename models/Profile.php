@@ -90,4 +90,10 @@ class Profile extends ActiveRecord
     {
         return $this->hasOne($this->module->modelMap['User'], ['id' => 'user_id']);
     }
+
+    public function getMediaAvatar() {
+        return \mata\media\models\Media::find()->forItem($this, 'Avatar')->one();
+    }
+
+    
 }
