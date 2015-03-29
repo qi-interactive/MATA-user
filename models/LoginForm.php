@@ -71,6 +71,9 @@ class LoginForm extends Model
         ['password', function ($attribute) {
             if ($this->user === null || !Password::validate($this->password, $this->user->password_hash)) {
                 $this->addError($attribute, \Yii::t('user', 'Invalid login or password'));
+
+                // Add error for login -- we don't want to indicate if the username failed or password
+                $this->addError('login', \Yii::t('user', 'Invalid login or password'));
             }
         }],
         ['login', function ($attribute) {
