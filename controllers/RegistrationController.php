@@ -54,7 +54,7 @@ class RegistrationController extends Controller
             'access' => [
                 'class' => AccessControl::className(),
                 'rules' => [
-                    ['allow' => true, 'actions' => ['register', 'connect'], 'roles' => ['?']],
+                    ['allow' => true, 'actions' => ['register', 'connect'], 'roles' => ['?', '@']],
                     ['allow' => true, 'actions' => ['confirm', 'resend'], 'roles' => ['?', '@']],
                 ]
             ],
