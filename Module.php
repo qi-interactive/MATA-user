@@ -108,7 +108,8 @@ class Module extends BaseModule
             [
                 "label" => "Logout",
                 "url" => "/mata-cms/user/logout",
-                "icon" => "/images/logout.svg"
+                "icon" => "/images/logout.svg",
+                "class" => 'hard-link'
             ]
             ];
     }
