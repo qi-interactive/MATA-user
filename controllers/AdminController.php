@@ -57,19 +57,19 @@ class AdminController extends Controller
                     'block'   => ['post']
                 ],
             ],
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'actions' => ['index', 'create', 'update', 'delete', 'block', 'confirm'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                        'matchCallback' => function ($rule, $action) {
-                            return \Yii::$app->user->identity->getIsAdmin();
-                        }
-                    ],
-                ]
-            ]
+            // 'access' => [
+            //     'class' => AccessControl::className(),
+            //     'rules' => [
+            //         [
+            //             'actions' => ['index', 'create', 'update', 'delete', 'block', 'confirm'],
+            //             'allow' => true,
+            //             'roles' => ['@'],
+            //             'matchCallback' => function ($rule, $action) {
+            //                 return \Yii::$app->user->identity->getIsAdmin();
+            //             }
+            //         ],
+            //     ]
+            // ]
         ];
     }
 

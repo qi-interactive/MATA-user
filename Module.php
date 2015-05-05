@@ -102,7 +102,7 @@ class Module extends BaseModule
             ],
             [
                 "label" => "Manage users",
-                "url" => "/mata-cms/user/settings",
+                "url" => "/mata-cms/user/admin/index",
                 "icon" => "/images/user-profile-account-default.svg"
             ],
             [
