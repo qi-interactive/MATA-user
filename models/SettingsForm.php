@@ -73,7 +73,7 @@ class SettingsForm extends Model
     public function rules()
     {
         return [
-            [['username', 'email', 'current_password'], 'required'],
+            [['username', 'email'], 'required'],
             [['username', 'email'], 'filter', 'filter' => 'trim'],
             ['username', 'match', 'pattern' => '/^[a-zA-Z]\w+$/'],
             ['username', 'string', 'min' => 3, 'max' => 20],
@@ -85,6 +85,11 @@ class SettingsForm extends Model
             ['current_password', function ($attr) {
                 if (!Password::validate($this->$attr, $this->user->password_hash)) {
                     $this->addError($attr, \Yii::t('user', 'Current password is not valid'));
+                }
+            }],
+            ['new_password', function ($attr) {
+                if (!$this->current_password) {
+                    $this->addError('current_password', \Yii::t('user', 'Current password cannot be blank'));
                 }
             }]
         ];

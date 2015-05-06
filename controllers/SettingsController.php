@@ -25,6 +25,8 @@ use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
+use matacms\base\MessageEvent;
+use matacms\filters\NotificationFilter;
 
 /**
  * SettingsController manages updating user settings (e.g. profile, email and password).
@@ -36,7 +38,7 @@ use yii\widgets\ActiveForm;
 class SettingsController extends Controller
 {
     /** @inheritdoc */
-    public $defaultAction = 'profile';
+    public $defaultAction = 'account';
 
     /** @var Finder */
     protected $finder;
@@ -73,6 +75,9 @@ class SettingsController extends Controller
                     ],
                 ]
             ],
+            'notifications' => [
+                'class' => NotificationFilter::className(),
+            ]
         ];
     }
 
@@ -91,21 +96,42 @@ class SettingsController extends Controller
      * Shows profile settings form.
      * @return string|\yii\web\Response
      */
-    public function actionProfile()
-    {
-        $model = $this->finder->findProfileById(\Yii::$app->user->identity->getId());
+    // public function actionProfile()
+    // {
+    //     $model = $this->finder->findProfileById(\Yii::$app->user->identity->getId());
 
-        $this->performAjaxValidation($model);
+    //     $this->performAjaxValidation($model);
 
-        if ($model->load(\Yii::$app->request->post()) && $model->save()) {
-            \Yii::$app->getSession()->setFlash('success', \Yii::t('user', 'Your profile has been updated'));
-            return $this->refresh();
-        }
+    //     if ($model->load(\Yii::$app->request->post()) && $model->save()) {
+    //         \Yii::$app->getSession()->setFlash('success', \Yii::t('user', 'Your profile has been updated'));
+    //         return $this->refresh();
+    //     }
 
-        return $this->render('profile', [
-            'model' => $model,
-        ]);
-    }
+    //     return $this->render('profile', [
+    //         'model' => $model,
+    //     ]);
+    // }
+
+    /**
+     * Displays page where user can update account settings (username, email or password).
+     * @return string|\yii\web\Response
+     */
+    // public function actionAccount()
+    // {
+    //     /** @var SettingsForm $model */
+    //     $model = \Yii::createObject(SettingsForm::className());
+
+    //     $this->performAjaxValidation($model);
+
+    //     if ($model->load(\Yii::$app->request->post()) && $model->save()) {
+    //         \Yii::$app->session->setFlash('success', \Yii::t('user', 'Your account details have been updated'));
+    //         return $this->refresh();
+    //     }
+
+    //     return $this->render('account', [
+    //         'model' => $model,
+    //     ]);
+    // }
 
     /**
      * Displays page where user can update account settings (username, email or password).
@@ -113,18 +139,24 @@ class SettingsController extends Controller
      */
     public function actionAccount()
     {
-        /** @var SettingsForm $model */
-        $model = \Yii::createObject(SettingsForm::className());
+        $profileModel = $this->finder->findProfileById(\Yii::$app->user->identity->getId());
+        $accountModel = \Yii::createObject(SettingsForm::className());
 
-        $this->performAjaxValidation($model);
+        $this->performAjaxValidation($profileModel);
+        $this->performAjaxValidation($accountModel);
 
-        if ($model->load(\Yii::$app->request->post()) && $model->save()) {
-            \Yii::$app->session->setFlash('success', \Yii::t('user', 'Your account details have been updated'));
-            return $this->refresh();
+        if ($profileModel->load(\Yii::$app->request->post()) && $accountModel->load(\Yii::$app->request->post())) {
+
+            if($profileModel->validate() && $accountModel->validate() && $profileModel->save() && $accountModel->save()) {
+                $this->trigger('EVENT_MODEL_CREATED', new MessageEvent('Your account has been updated'));
+                return $this->refresh();
+            }
+                       
         }
 
         return $this->render('account', [
-            'model' => $model,
+            'profileModel' => $profileModel,
+            'accountModel' => $accountModel,
         ]);
     }
 

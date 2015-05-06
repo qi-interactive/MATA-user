@@ -10,7 +10,7 @@
  */
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use matacms\widgets\ActiveForm;
 
 /**
  * @var $this  yii\web\View
@@ -22,47 +22,39 @@ $this->title = Yii::t('user', 'Account settings');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<?= $this->render('/_alert', ['module' => Yii::$app->getModule('user')]) ?>
+<div class="account-update">
 
-<div class="row">
-    <div class="col-md-3">
-        <?= $this->render('_menu') ?>
+    <h1><?= Html::encode($this->title) ?></h1>
+
+    <?php $form = ActiveForm::begin([
+        'id' => 'account-form',
+        'enableAjaxValidation' => true,
+        'enableClientValidation' => false,
+    ]); ?>
+
+    <div class="form-row">
+        <h4>profile settings</h4>
+
+        <?= $form->field($profileModel, 'name') ?>
+
+        <?= $form->field($profileModel, 'Avatar')->media() ?>
+
     </div>
-    <div class="col-md-9">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <?= Html::encode($this->title) ?>
-            </div>
-            <div class="panel-body">
-                <?php $form = ActiveForm::begin([
-                    'id'          => 'account-form',
-                    'options'     => ['class' => 'form-horizontal'],
-                    'fieldConfig' => [
-                        'template'     => "{label}\n<div class=\"col-lg-9\">{input}</div>\n<div class=\"col-sm-offset-3 col-lg-9\">{error}\n{hint}</div>",
-                        'labelOptions' => ['class' => 'col-lg-3 control-label'],
-                    ],
-                    'enableAjaxValidation'   => true,
-                    'enableClientValidation' => false,
-                ]); ?>
 
-                <?= $form->field($model, 'email') ?>
+    <div class="form-row">
+        <h4>account settings</h4>
 
-                <?= $form->field($model, 'username') ?>
+        <?= $form->field($accountModel, 'email') ?>
 
-                <?= $form->field($model, 'new_password')->passwordInput() ?>
+        <?= $form->field($accountModel, 'username') ?>
 
-                <hr/>
+        <?= $form->field($accountModel, 'new_password')->passwordInput() ?>
 
-                <?= $form->field($model, 'current_password')->passwordInput() ?>
+        <?= $form->field($accountModel, 'current_password')->passwordInput() ?>
 
-                <div class="form-group">
-                    <div class="col-lg-offset-3 col-lg-9">
-                        <?= Html::submitButton(Yii::t('user', 'Save'), ['class' => 'btn btn-block btn-success']) ?><br>
-                    </div>
-                </div>
-
-                <?php ActiveForm::end(); ?>
-            </div>
-        </div>
     </div>
+
+    <?= $form->submitButton($profileModel) ?>
+
+    <?php ActiveForm::end(); ?>
 </div>
