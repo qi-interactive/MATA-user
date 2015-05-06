@@ -12,6 +12,8 @@
 use yii\helpers\Html;
 use matacms\widgets\ActiveForm;
 
+\matacms\theme\simple\assets\UserAsset::register($this);
+
 /**
  * @var $this  yii\web\View
  * @var $form  yii\widgets\ActiveForm
@@ -32,26 +34,26 @@ $this->params['breadcrumbs'][] = $this->title;
         'enableClientValidation' => false,
     ]); ?>
 
-    <div class="form-row">
-        <h4>profile settings</h4>
+    <div class="panel panel-default">
+        <div class="panel-heading">Profile settings</div>
+        <div class="panel-body">
+            <?= $form->field($profileModel, 'name') ?>
 
-        <?= $form->field($profileModel, 'name') ?>
-
-        <?= $form->field($profileModel, 'Avatar')->media() ?>
-
+            <?= $form->field($profileModel, 'Avatar')->media() ?>
+        </div>
     </div>
 
-    <div class="form-row">
-        <h4>account settings</h4>
+    <div class="panel panel-default">
+        <div class="panel-heading">Account settings</div>
+        <div class="panel-body">
+            <?= $form->field($accountModel, 'email') ?>
 
-        <?= $form->field($accountModel, 'email') ?>
+            <?= $form->field($accountModel, 'username') ?>
 
-        <?= $form->field($accountModel, 'username') ?>
+            <?= $form->field($accountModel, 'new_password')->passwordInput() ?>
 
-        <?= $form->field($accountModel, 'new_password')->passwordInput() ?>
-
-        <?= $form->field($accountModel, 'current_password')->passwordInput() ?>
-
+            <?= $form->field($accountModel, 'current_password')->passwordInput() ?>
+        </div>
     </div>
 
     <?= $form->submitButton($profileModel) ?>

@@ -130,7 +130,7 @@ class AdminController extends Controller
 
         if ($user->load($r->post()) && $profile->load($r->post()) && $user->save() && $profile->save()) {
             \Yii::$app->getSession()->setFlash('success', \Yii::t('user', 'User has been updated'));
-            return $this->refresh();
+            return $this->redirect(['index']);
         }
 
         return $this->render('update', [

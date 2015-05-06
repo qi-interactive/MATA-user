@@ -10,7 +10,9 @@
  */
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use matacms\widgets\ActiveForm;
+
+\matacms\theme\simple\assets\UserAsset::register($this);
 
 /**
  * @var yii\web\View              $this
