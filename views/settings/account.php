@@ -32,31 +32,32 @@ $this->params['breadcrumbs'][] = $this->title;
         'id' => 'account-form',
         'enableAjaxValidation' => true,
         'enableClientValidation' => false,
-    ]); ?>
+        ]); ?>
 
-    <div class="panel panel-default">
-        <div class="panel-heading">Profile settings</div>
-        <div class="panel-body">
-            <?= $form->field($profileModel, 'name') ?>
+        <div class="panel panel-default">
+            <div class="panel-heading">Account details</div>
+            <div class="panel-body">
+                <?= $form->field($accountModel, 'email') ?>
 
-            <?= $form->field($profileModel, 'Avatar')->media() ?>
+                <?= $form->field($accountModel, 'username') ?>
+
+                <?= $form->field($accountModel, 'new_password')->passwordInput() ?>
+
+                <?= $form->field($accountModel, 'current_password')->passwordInput() ?>
+            </div>
         </div>
-    </div>
 
-    <div class="panel panel-default">
-        <div class="panel-heading">Account settings</div>
-        <div class="panel-body">
-            <?= $form->field($accountModel, 'email') ?>
+        <div class="panel panel-default">
+            <div class="panel-heading">User Profile details </div>
+            <div class="panel-body">
+                <?= $form->field($profileModel, 'name') ?>
 
-            <?= $form->field($accountModel, 'username') ?>
-
-            <?= $form->field($accountModel, 'new_password')->passwordInput() ?>
-
-            <?= $form->field($accountModel, 'current_password')->passwordInput() ?>
+                <?= $form->field($profileModel, 'Avatar')->media() ?>
+            </div>
         </div>
+
+
+        <?= $form->submitButton($profileModel) ?>
+
+        <?php ActiveForm::end(); ?>
     </div>
-
-    <?= $form->submitButton($profileModel) ?>
-
-    <?php ActiveForm::end(); ?>
-</div>
