@@ -11,6 +11,7 @@
 
 use yii\helpers\Html;
 use matacms\widgets\ActiveForm;
+use yii\helpers\Inflector;
 
 \matacms\theme\simple\assets\UserAsset::register($this);
 
@@ -55,3 +56,13 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
 
         <?php ActiveForm::end(); ?>
+
+        <script>
+
+          parent.mata.simpleTheme.header
+          .setText('YOU\'RE IN <?= Inflector::camel2words($this->context->module->id) ?> MODULE')
+          .showBackToListView()
+          .hideVersions()
+          .show();
+
+      </script>

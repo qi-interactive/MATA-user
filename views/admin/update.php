@@ -11,6 +11,7 @@
 
 use yii\helpers\Html;
 use matacms\widgets\ActiveForm;
+use yii\helpers\Inflector;
 
 \matacms\theme\simple\assets\UserAsset::register($this);
 
@@ -32,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
     <div class="panel panel-default alert-section">
         <div class="alert alert-info">
-            
+
             <?= Yii::t('user', 'Registered at {0, date, MMMM dd, YYYY HH:mm} from {1}', [$user->created_at, is_null($user->registration_ip) ? 'N/D' : $user->registration_ip]) ?>
         </div>
         <?php if ($module->enableConfirmation && $user->getIsConfirmed()): ?>
@@ -84,3 +85,13 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
 
         <?php ActiveForm::end(); ?>
+
+        <script>
+
+          parent.mata.simpleTheme.header
+          .setText('UPDATE USER: <span> <?=$profile->name ?></span>')
+          .showBackToListView()
+          .hideVersions()
+          .show();
+
+      </script>

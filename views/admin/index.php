@@ -125,7 +125,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <script>
 
       parent.mata.simpleTheme.header
-      .setText('YOU\'RE IN <?= Inflector::camel2words($this->context->module->id) ?> MODULE')
+      .setText('YOU\'RE IN MANAGE <?= Inflector::camel2words($this->context->module->id) ?> MODULE')
       .hideBackToListView()
       .hideVersions()
       .show();
