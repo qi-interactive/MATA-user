@@ -140,13 +140,13 @@ class User extends ActiveRecord implements IdentityInterface
     public function attributeLabels()
     {
         return [
-            'username'          => \Yii::t('user', 'Username'),
-            'email'             => \Yii::t('user', 'Email'),
-            'registration_ip'   => \Yii::t('user', 'Registration ip'),
-            'unconfirmed_email' => \Yii::t('user', 'New email'),
-            'password'          => \Yii::t('user', 'Password'),
-            'created_at'        => \Yii::t('user', 'Registration time'),
-            'confirmed_at'      => \Yii::t('user', 'Confirmation time'),
+        'username'          => \Yii::t('user', 'Username'),
+        'email'             => \Yii::t('user', 'Email'),
+        'registration_ip'   => \Yii::t('user', 'Registration ip'),
+        'unconfirmed_email' => \Yii::t('user', 'New email'),
+        'password'          => \Yii::t('user', 'Password'),
+        'created_at'        => \Yii::t('user', 'Registration time'),
+        'confirmed_at'      => \Yii::t('user', 'Confirmation time'),
         ];
     }
 
@@ -154,7 +154,7 @@ class User extends ActiveRecord implements IdentityInterface
     public function behaviors()
     {
         return [
-            TimestampBehavior::className(),
+        TimestampBehavior::className(),
         ];
     }
 
@@ -162,11 +162,11 @@ class User extends ActiveRecord implements IdentityInterface
     public function scenarios()
     {
         return [
-            'register' => ['username', 'email', 'password'],
-            'connect'  => ['username', 'email'],
-            'create'   => ['username', 'email', 'password'],
-            'update'   => ['username', 'email', 'password'],
-            'settings' => ['username', 'email', 'password']
+        'register' => ['username', 'email', 'password'],
+        'connect'  => ['username', 'email'],
+        'create'   => ['username', 'email', 'password'],
+        'update'   => ['username', 'email', 'password'],
+        'settings' => ['username', 'email', 'password']
         ];
     }
 
@@ -175,22 +175,22 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             // username rules
-            ['username', 'required', 'on' => ['register', 'connect', 'create', 'update']],
-            ['username', 'match', 'pattern' => '/^[a-zA-Z]\w+$/'],
-            ['username', 'string', 'min' => 3, 'max' => 25],
-            ['username', 'unique'],
-            ['username', 'trim'],
+        ['username', 'required', 'on' => ['register', 'connect', 'create', 'update']],
+        ['username', 'match', 'pattern' => '/^[a-zA-Z]\w+$/'],
+        ['username', 'string', 'min' => 3, 'max' => 25],
+        ['username', 'unique'],
+        ['username', 'trim'],
 
             // email rules
-            ['email', 'required', 'on' => ['register', 'connect', 'create', 'update']],
-            ['email', 'email'],
-            ['email', 'string', 'max' => 255],
-            ['email', 'unique'],
-            ['email', 'trim'],
+        ['email', 'required', 'on' => ['register', 'connect', 'create', 'update']],
+        ['email', 'email'],
+        ['email', 'string', 'max' => 255],
+        ['email', 'unique'],
+        ['email', 'trim'],
 
             // password rules
-            ['password', 'required', 'on' => ['register']],
-            ['password', 'string', 'min' => 6, 'on' => ['register', 'create']],
+        ['password', 'required', 'on' => ['register']],
+        ['password', 'string', 'min' => 6, 'on' => ['register', 'create']],
         ];
     }
 
@@ -264,7 +264,7 @@ class User extends ActiveRecord implements IdentityInterface
                 $token = \Yii::createObject([
                     'class' => Token::className(),
                     'type'  => Token::TYPE_CONFIRMATION,
-                ]);
+                    ]);
                 $token->link('user', $this);
                 $this->mailer->sendConfirmationMessage($this, $token);
             } else {
@@ -298,19 +298,19 @@ class User extends ActiveRecord implements IdentityInterface
             'user_id' => $this->id,
             'code'    => $code,
             'type'    => Token::TYPE_CONFIRMATION,
-        ])->one();
+            ])->one();
 
         if ($token === null || $token->isExpired) {
             \Yii::$app->session->setFlash('danger', \Yii::t('user', 'The confirmation link is invalid or expired. Please try requesting a new one.'));
         } else {
             $token->delete();
-    
+
             $this->confirmed_at = time();
-    
+
             \Yii::$app->user->login($this);
-    
+
             \Yii::getLogger()->log('User has been confirmed', Logger::LEVEL_INFO);
-    
+
             if ($this->save(false)) {
                 \Yii::$app->session->setFlash('success', \Yii::t('user', 'Thank you, registration is now complete.'));
             } else {
@@ -334,27 +334,27 @@ class User extends ActiveRecord implements IdentityInterface
         $token = $this->finder->findToken([
             'user_id' => $this->id,
             'code'    => $code,
-        ])->andWhere(['in', 'type', [Token::TYPE_CONFIRM_NEW_EMAIL, Token::TYPE_CONFIRM_OLD_EMAIL]])->one();
+            ])->andWhere(['in', 'type', [Token::TYPE_CONFIRM_NEW_EMAIL, Token::TYPE_CONFIRM_OLD_EMAIL]])->one();
 
         if (empty($this->unconfirmed_email) || $token === null || $token->isExpired) {
             \Yii::$app->session->setFlash('danger', \Yii::t('user', 'Your confirmation token is invalid or expired'));
         } else {
 
             $token->delete();
-    
+
             if (empty($this->unconfirmed_email)) {
                 \Yii::$app->session->setFlash('danger', \Yii::t('user', 'An error occurred processing your request'));
             } else if (static::find()->where(['email' => $this->unconfirmed_email])->exists() == false) {
                 if ($this->module->emailChangeStrategy == Module::STRATEGY_SECURE) {
                     switch ($token->type) {
                         case Token::TYPE_CONFIRM_NEW_EMAIL:
-                            $this->flags |= self::NEW_EMAIL_CONFIRMED;
-                            \Yii::$app->session->setFlash('success', \Yii::t('user', 'Awesome, almost there. Now you need to click the confirmation link sent to your old email address'));
-                            break;
+                        $this->flags |= self::NEW_EMAIL_CONFIRMED;
+                        \Yii::$app->session->setFlash('success', \Yii::t('user', 'Awesome, almost there. Now you need to click the confirmation link sent to your old email address'));
+                        break;
                         case Token::TYPE_CONFIRM_OLD_EMAIL:
-                            $this->flags |= self::OLD_EMAIL_CONFIRMED;
-                            \Yii::$app->session->setFlash('success', \Yii::t('user', 'Awesome, almost there. Now you need to click the confirmation link sent to your new email address'));
-                            break;
+                        $this->flags |= self::OLD_EMAIL_CONFIRMED;
+                        \Yii::$app->session->setFlash('success', \Yii::t('user', 'Awesome, almost there. Now you need to click the confirmation link sent to your new email address'));
+                        break;
                     }
                 }
                 if ($this->module->emailChangeStrategy == Module::STRATEGY_DEFAULT || ($this->flags & self::NEW_EMAIL_CONFIRMED && $this->flags & self::OLD_EMAIL_CONFIRMED)) {
@@ -427,7 +427,7 @@ class User extends ActiveRecord implements IdentityInterface
                 'class'          => Profile::className(),
                 'user_id'        => $this->id,
                 'gravatar_email' => $this->email,
-            ]);
+                ]);
             $profile->save(false);
         }
         parent::afterSave($insert, $changedAttributes);
@@ -468,4 +468,15 @@ class User extends ActiveRecord implements IdentityInterface
         $profile = $this->getProfile()->one();
         return  $profile != null && $profile->name != null ?  $profile->name : $this->username;
     }
+
+    public function filterableAttributes() {
+        return ["username", "email", "created_at"];
+    }
+
+    public function __get($name) {
+     if ($name == "created_at")
+        return date('Y-m-d H:i:s', strtotime($this->getAttribute($name)));
+
+    return parent::__get($name);
+}
 }

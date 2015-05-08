@@ -21,6 +21,8 @@ use yii\filters\VerbFilter;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
+use yii\data\Sort;
+use mata\helpers\BehaviorHelper;
 
 /**
  * AdminController allows you to administrate users.
@@ -49,14 +51,14 @@ class AdminController extends Controller
     public function behaviors()
     {
         return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete'  => ['post'],
-                    'confirm' => ['post'],
-                    'block'   => ['post']
-                ],
-            ],
+        'verbs' => [
+        'class' => VerbFilter::className(),
+        'actions' => [
+        'delete'  => ['post'],
+        'confirm' => ['post'],
+        'block'   => ['post']
+        ],
+        ],
             // 'access' => [
             //     'class' => AccessControl::className(),
             //     'rules' => [
@@ -82,10 +84,47 @@ class AdminController extends Controller
         $searchModel  = \Yii::createObject(UserSearch::className());
         $dataProvider = $searchModel->search($_GET);
 
-        return $this->render('index', [
+            // Remove any default orderings
+            // $dataProvider->query->orderBy = null;
+
+        $sort = new Sort([
+            'attributes' => $searchModel->filterableAttributes()
+            ]);
+
+        if(!empty($sort->orders)) {
+            $dataProvider->query->orderBy = null;
+        } else {
+
+            if(BehaviorHelper::hasBehavior($searchModel, \mata\arhistory\behaviors\HistoryBehavior::class)) {
+                $dataProvider->query->select('*');
+                $reflection =  new \ReflectionClass($searchModel);
+                $parentClass = $reflection->getParentClass();
+
+                $alias = $searchModel->getTableSchema()->name;
+                $pk = $searchModel->getTableSchema()->primaryKey;
+
+
+                if (is_array($pk)) {
+                    if(count($pk) > 1)
+                        throw new NotFoundHttpException('Combined primary keys are not supported.');
+                    $pk = $pk[0];
+                }
+
+                $aliasWithPk = $alias . '.' . $pk;
+
+                $dataProvider->query->join('INNER JOIN', 'arhistory_revision', 'arhistory_revision.DocumentId = CONCAT(:class, '.$aliasWithPk.')', [':class' => $parentClass->name . '-']);
+                $dataProvider->query->andWhere('arhistory_revision.Revision = (SELECT MAX(Revision) FROM `arhistory_revision` WHERE arhistory_revision.`DocumentId` = CONCAT(:class, '.$aliasWithPk.'))', [':class' => $parentClass->name . '-']);
+                $dataProvider->query->orderBy('arhistory_revision.DateCreated DESC');
+            }   
+        }
+
+        $dataProvider->setSort($sort);
+
+        return $this->render("index", [
+            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'searchModel'  => $searchModel,
-        ]);
+            'sort' => $sort
+            ]);
     }
 
     /**
@@ -99,7 +138,7 @@ class AdminController extends Controller
         $user = \Yii::createObject([
             'class'    => User::className(),
             'scenario' => 'create',
-        ]);
+            ]);
 
         $this->performAjaxValidation($user);
 
@@ -110,7 +149,7 @@ class AdminController extends Controller
 
         return $this->render('create', [
             'user' => $user
-        ]);
+            ]);
     }
 
     /**
@@ -137,7 +176,7 @@ class AdminController extends Controller
             'user'    => $user,
             'profile' => $profile,
             'module'  => $this->module,
-        ]);
+            ]);
     }
 
     /**
@@ -209,6 +248,10 @@ class AdminController extends Controller
             throw new NotFoundHttpException('The requested page does not exist');
         }
         return $user;
+    }
+
+    public function getModel() {
+        return new \mata\user\models\User();
     }
 
     /**

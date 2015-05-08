@@ -10,8 +10,10 @@
  */
 
 use yii\helpers\Html;
-use yii\grid\GridView;
 use yii\widgets\Pjax;
+use yii\widgets\ListView;
+use kartik\sortable\Sortable;
+use yii\helpers\Inflector;
 
 /**
  * @var yii\web\View $this
@@ -25,73 +27,107 @@ $this->params['breadcrumbs'][] = $this->title;
 <h1><?= Html::encode($this->title) ?> <?= Html::a(Yii::t('user', 'Create a user account'), ['create'], ['class' => 'btn btn-success']) ?></h1>
 
 <?= $this->render('/_alert', [
-    'module' => Yii::$app->getModule('user'),
-]) ?>
+  'module' => Yii::$app->getModule('user'),
+  ]) ?>
 
-<?php Pjax::begin() ?>
+  <div class="content-block-index">
+    <div class="content-block-top-bar">
+      <div class="row">
+        <div class="btns-container">
+          <div class="elements">
+            <?= Html::a(sprintf('Create %s', Yii::$app->controller->getModel()->getModelLabel()), ['create'], ['class' => 'btn btn-success']) ?>
+          </div>
+        </div>
+        <div class="search-container"> 
+          <div class="search-input-container">
+            <input class="search-input" id="item-search" placeholder="Type to search" value="" name="search">
+            <div class="search-submit-btn"><input type="submit" value=""></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<?= GridView::widget([
+  <?php 
+
+  $pjax = Pjax::begin([
+   "timeout" => 10000,
+   "scrollTo" => false
+   ]);
+
+   if (count($searchModel->filterableAttributes()) > 0):  ?>
+
+   <div class="content-block-index">
+     <div class="content-block-top-bar sort-by-wrapper">
+       <div class="top-bar-sort-by-container">
+         <ul>
+           <li class="sort-by-label"> Sort by </li>
+           <?php foreach ($searchModel->filterableAttributes() as $attribute): ?>
+             <li> 
+              <?php
+
+            //  Sorting resets page count
+              $link = $sort->link($attribute);
+              echo preg_replace("/page=\d*/", "page=1", $link);
+              ?> </li>
+            <?php endforeach; ?>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  <?php endif; ?>
+
+
+  <div class="border"> </div>
+
+  <?php echo ListView::widget([
     'dataProvider' => $dataProvider,
-    'filterModel'  => $searchModel,
-    'layout'  => "{items}\n{pager}",
-    'columns' => [
-        'username',
-        'email:email',
-        [
-            'attribute' => 'registration_ip',
-            'value' => function ($model) {
-                    return $model->registration_ip == null
-                        ? '<span class="not-set">' . Yii::t('user', '(not set)') . '</span>'
-                        : $model->registration_ip;
-                },
-            'format' => 'html',
-        ],
-        [
-            'attribute' => 'created_at',
-            'value' => function ($model) {
-                return Yii::t('user', '{0, date, MMMM dd, YYYY HH:mm}', [$model->created_at]);
-            }
-        ],
-        [
-            'header' => Yii::t('user', 'Confirmation'),
-            'value' => function ($model) {
-                if ($model->isConfirmed) {
-                    return '<div class="text-center"><span class="text-success">' . Yii::t('user', 'Confirmed') . '</span></div>';
-                } else {
-                    return Html::a(Yii::t('user', 'Confirm'), ['confirm', 'id' => $model->id], [
-                        'class' => 'btn btn-xs btn-success btn-block',
-                        'data-method' => 'post',
-                        'data-confirm' => Yii::t('user', 'Are you sure you want to confirm this user?'),
-                    ]);
-                }
-            },
-            'format' => 'raw',
-            'visible' => Yii::$app->getModule('user')->enableConfirmation
-        ],
-        [
-            'header' => Yii::t('user', 'Block status'),
-            'value' => function ($model) {
-                if ($model->isBlocked) {
-                    return Html::a(Yii::t('user', 'Unblock'), ['block', 'id' => $model->id], [
-                        'class' => 'btn btn-xs btn-success btn-block',
-                        'data-method' => 'post',
-                        'data-confirm' => Yii::t('user', 'Are you sure you want to unblock this user?')
-                    ]);
-                } else {
-                    return Html::a(Yii::t('user', 'Block'), ['block', 'id' => $model->id], [
-                        'class' => 'btn btn-xs btn-danger btn-block',
-                        'data-method' => 'post',
-                        'data-confirm' => Yii::t('user', 'Are you sure you want to block this user?')
-                    ]);
-                }
-            },
-            'format' => 'raw',
-        ],
-        [
-            'class' => 'yii\grid\ActionColumn',
-            'template' => '{update} {delete}',
-        ],
+    'id' => 'infinite-list-view',
+    'itemView' => '_itemView',
+    'layout' => "{items}\n{pager}",
+    'pager' => [
+    'class' => '\mata\widgets\InfiniteScrollPager\InfiniteScrollPager',
+    'clientOptions' => [
+    'pjax' => [
+    'id' => $pjax->options['id'],
     ],
-]); ?>
+    'listViewId' => 'infinite-list-view',
+    'itemSelector' => 'div[data-key]'
+    ]
+    ]
+    ]); 
 
-<?php Pjax::end() ?>
+    ?>
+    <?php Pjax::end() ?>
+
+    <?php 
+
+    if (count($searchModel->filterableAttributes()) > 0)
+      $this->registerJs('
+        $("#item-search").on("keyup", function() {
+          var attrs = ' . json_encode($searchModel->filterableAttributes()) . ';
+          var reqAttrs = []
+          var value = $(this).val();
+          $(attrs).each(function(i, attr) {
+            reqAttrs.push({
+              "name" : "' . $searchModel->formName() . '[" + attr + "]",
+              "value" : value
+            });
+  });
+
+    $.pjax.reload({container:"#w0", "url" : "?" + decodeURIComponent($.param(reqAttrs))});
+  })
+    ');
+
+    ?>
+
+    <script>
+
+      parent.mata.simpleTheme.header
+      .setText('YOU\'RE IN <?= Inflector::camel2words($this->context->module->id) ?> MODULE')
+      .hideBackToListView()
+      .hideVersions()
+      .show();
+
+    </script>

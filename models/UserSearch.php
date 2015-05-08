@@ -49,8 +49,8 @@ class UserSearch extends Model
     public function rules()
     {
         return [
-            [['created_at'], 'integer'],
-            [['username', 'email', 'registration_ip'], 'safe'],
+        [['created_at'], 'integer'],
+        [['username', 'email', 'registration_ip'], 'safe'],
         ];
     }
 
@@ -58,10 +58,10 @@ class UserSearch extends Model
     public function attributeLabels()
     {
         return [
-            'username'        => \Yii::t('user', 'Username'),
-            'email'           => \Yii::t('user', 'Email'),
-            'created_at'      => \Yii::t('user', 'Registration time'),
-            'registration_ip' => \Yii::t('user', 'Registration ip'),
+        'username'        => \Yii::t('user', 'Username'),
+        'email'           => \Yii::t('user', 'Email'),
+        'created_at'      => \Yii::t('user', 'Registration time'),
+        'registration_ip' => \Yii::t('user', 'Registration ip'),
         ];
     }
 
@@ -75,17 +75,22 @@ class UserSearch extends Model
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-        ]);
+            ]);
 
         if (!($this->load($params) && $this->validate())) {
             return $dataProvider;
         }
 
         $query->andFilterWhere(['created_at'=> $this->created_at])
-            ->andFilterWhere(['like', 'username', $this->username])
-            ->andFilterWhere(['like', 'email', $this->email])
-            ->andFilterWhere(['registration_ip' => $this->registration_ip]);
+        ->andFilterWhere(['like', 'username', $this->username])
+        ->andFilterWhere(['like', 'email', $this->email])
+        ->andFilterWhere(['registration_ip' => $this->registration_ip]);
 
         return $dataProvider;
+    }
+
+
+    public function filterableAttributes() {
+        return ["username", "email", "created_at"];
     }
 }

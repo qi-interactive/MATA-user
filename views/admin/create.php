@@ -23,31 +23,35 @@ $this->title = Yii::t('user', 'Create a user account');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('user', 'Users'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-
-<?= $this->render('/_alert', [
-    'module' => Yii::$app->getModule('user'),
-]) ?>
-
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <?= Html::encode($this->title) ?>
+<div class="container alert-container">
+    <?= $this->render('/_alert', [
+        'module' => Yii::$app->getModule('user'),
+        ]) ?>
     </div>
-    <div class="panel-body">
-        <div class="alert alert-info">
-            <?= Yii::t('user', 'Credentials will be sent to the user by email') ?>.
-            <?= Yii::t('user', 'A password will be generated automatically if not provided') ?>.
-        </div>
-        <?php $form = ActiveForm::begin([
-            'enableAjaxValidation'   => true,
-            'enableClientValidation' => false
+
+    <?php $form = ActiveForm::begin([
+        'enableAjaxValidation'   => true,
+        'enableClientValidation' => false
         ]); ?>
 
-        <?= $this->render('_user', ['form' => $form, 'user' => $user]) ?>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <?= Html::encode($this->title) ?>
+            </div>
+            <div class="panel-body">
+                <div class="alert-section">
+                    <div class="alert alert-info">
+                        <?= Yii::t('user', 'Credentials will be sent to the user by email') ?>.
+                        <?= Yii::t('user', 'A password will be generated automatically if not provided') ?>.
+                    </div>
+                </div>
 
-        <div class="form-group">
+                <?= $this->render('_user', ['form' => $form, 'user' => $user]) ?>
+            </div>
+        </div>
+
+        <div class="form-group submit-form-group">
             <?= Html::submitButton(Yii::t('user', 'Save'), ['class' => 'btn btn-success']) ?>
         </div>
 
         <?php ActiveForm::end(); ?>
-    </div>
-</div>
