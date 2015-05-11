@@ -31,22 +31,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'module' => Yii::$app->getModule('user'),
         ]) ?>
     </div>
-    <div class="panel panel-default alert-section">
-        <div class="alert alert-info">
-
-            <?= Yii::t('user', 'Registered at {0, date, MMMM dd, YYYY HH:mm} from {1}', [$user->created_at, is_null($user->registration_ip) ? 'N/D' : $user->registration_ip]) ?>
+    <?php if(!empty($user->created_at)) : ?>
+        <div class="user-registered-date">
+            Registered on <?php 
+            echo  date('F d, Y H:i', strtotime($user->created_at));
+            ?>
         </div>
-        <?php if ($module->enableConfirmation && $user->getIsConfirmed()): ?>
-            <div class="alert alert-success">
-                <?= Yii::t('user', 'Confirmed at {0, date, MMMM dd, YYYY HH:mm}', [$user->created_at]) ?>
-            </div>
-        <?php endif; ?>
-        <?php if ($user->getIsBlocked()): ?>
-            <div class="alert alert-danger">
-                <?= Yii::t('user', 'Blocked at {0, date, MMMM dd, YYYY HH:mm}', [$user->blocked_at]) ?>
-            </div>
-        <?php endif;?>
-    </div>
+    <?php endif; ?>
 
     <?php $form = ActiveForm::begin([
         'enableAjaxValidation'   => true,
