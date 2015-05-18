@@ -1,26 +1,32 @@
-# Yii2-user [![Build Status](https://travis-ci.org/mata/yii2-user.svg?branch=master)](https://travis-ci.org/mata/yii2-user) [![Latest Stable Version](https://poser.pugx.org/mata/yii2-user/v/stable.png)](https://packagist.org/packages/mata/yii2-user) [![Total Downloads](https://poser.pugx.org/mata/yii2-user/downloads.png)](https://packagist.org/packages/mata/yii2-user)
+MATA Media
+==========================================
 
-Most of web applications provide a way for users to register, log in or reset their forgotten passwords. Rather than
-re-implementing this on each application, you can use Yii2-user which is a flexible user management module for Yii2 that
-handles common tasks such as registration, authentication and password retrieval. Current version includes following features:
+Media module interfaces with media storages such as AWS S3 to host content like images, videos and files. It is used extensively by many MATA and MATA CMS modules.
 
-* Registration with an optional confirmation per mail
-* Registration via social networks
-* Password retrieval
-* Account and profile management
-* Console commands
-* User management interface
 
-> **NOTE:** Module is in initial development. Anything may change at any time.
+Acknowledgement
+------------
+This module is based on the excellent ['Yii2 User by dektrium'](https://github.com/dektrium/yii2-user).
 
-## Documentation
 
-[Installation instructions](docs/installation.md) | [Definitive guide to Yii2-user](docs/README.md)
+Installation
+------------
 
-## Contributing
+- Add the module using composer: 
 
-Contributing instructions are located in [CONTRIBUTING.md](CONTRIBUTING.md) file.
+```json
+"mata/mata-user": "~1.0.0"
+```
 
-## License
+-  Run migrations
+```
+php yii migrate/up --migrationPath=@vendor/mata/mata-user/migrations
+```
 
-Yii2-user is released under the MIT License. See the bundled [LICENSE.md](LICENSE.md) for details.
+
+Changelog
+---------
+
+## 1.0.0-alpha, May 18, 2015
+
+- Initial release.
