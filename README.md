@@ -6,7 +6,7 @@ Media module interfaces with media storages such as AWS S3 to host content like 
 
 Acknowledgement
 ------------
-This module is based on the excellent ['Yii2 User by dektrium'](https://github.com/dektrium/yii2-user).
+This module is based on the excellent [Yii2 User by dektrium](https://github.com/dektrium/yii2-user).
 
 
 Installation
