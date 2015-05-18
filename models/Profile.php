@@ -38,6 +38,10 @@ class Profile extends ActiveRecord
         $this->module = \Yii::$app->getModule('user');
     }
 
+    public function behaviors() {
+        return [];
+    }
+
     /** @inheritdoc */
     public static function tableName()
     {
