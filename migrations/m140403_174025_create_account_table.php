@@ -1,23 +1,17 @@
 <?php
-
-/*
- * This file is part of the mata project.
- *
- * (c) mata project <http://github.com/mata/>
- *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ 
+/**
+ * @link http://www.matacms.com/
+ * @copyright Copyright (c) 2015 Qi Interactive Limited
+ * @license http://www.matacms.com/license/
  */
 
 use yii\db\Schema;
 use mata\user\migrations\Migration;
 
-/**
- * @author Dmitry Erofeev <dmeroff@gmail.com
- */
 class m140403_174025_create_account_table extends Migration
 {
-    public function up()
+    public function safeUp()
     {
         $this->createTable('{{%account}}', [
             'id'         => Schema::TYPE_PK,
@@ -31,7 +25,7 @@ class m140403_174025_create_account_table extends Migration
         $this->addForeignKey('fk_user_account', '{{%account}}', 'user_id', '{{%user}}', 'id', 'CASCADE', 'RESTRICT');
     }
 
-    public function down()
+    public function safeDown()
     {
         $this->dropTable('{{%account}}');
     }

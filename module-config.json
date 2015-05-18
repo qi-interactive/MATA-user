@@ -1,6 +1,6 @@
 {
     "name": "Users",
-    "description": "User management",
+    "description": "User management module for MATA applications.",
     "icon" : "/images/module-icon.svg",
-    "version" : "0.9.3-dev"
+    "version" : "1.0.0-alpha"
 }

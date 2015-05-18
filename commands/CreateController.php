@@ -1,12 +1,9 @@
 <?php
-
-/*
- * This file is part of the mata project.
- *
- * (c) mata project <http://github.com/mata/>
- *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
+ 
+/**
+ * @link http://www.matacms.com/
+ * @copyright Copyright (c) 2015 Qi Interactive Limited
+ * @license http://www.matacms.com/license/
  */
 
 namespace mata\user\commands;
@@ -15,13 +12,6 @@ use mata\user\models\User;
 use yii\console\Controller;
 use yii\helpers\Console;
 
-/**
- * Creates new user account.
- *
- * @property \mata\user\Module $module
- *
- * @author Dmitry Erofeev <dmeroff@gmail.com>
- */
 class CreateController extends Controller
 {
     /**
