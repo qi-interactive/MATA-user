@@ -1,12 +1,9 @@
 <?php
-
-/*
- * This file is part of the mata project.
- *
- * (c) mata project <http://github.com/mata/>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+ 
+/**
+ * @link http://www.matacms.com/
+ * @copyright Copyright (c) 2015 Qi Interactive Limited
+ * @license http://www.matacms.com/license/
  */
 
 namespace mata\user\models;
@@ -18,8 +15,6 @@ use mata\user\helpers\Password;
 /**
  * LoginForm get user's login and password, validates them and logs the user in. If user has been blocked, it adds
  * an error to login form.
- *
- * @author Dmitry Erofeev <dmeroff@gmail.com>
  */
 class LoginForm extends Model
 {

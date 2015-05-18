@@ -1,12 +1,9 @@
 <?php
-
-/*
- * This file is part of the mata project.
- *
- * (c) mata project <http://github.com/mata/>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+ 
+/**
+ * @link http://www.matacms.com/
+ * @copyright Copyright (c) 2015 Qi Interactive Limited
+ * @license http://www.matacms.com/license/
  */
 
 namespace mata\user\models;
@@ -42,7 +39,6 @@ use yii\web\IdentityInterface;
  * @property Account[] $accounts
  * @property Profile   $profile
  *
- * @author Dmitry Erofeev <dmeroff@gmail.com>
  */
 class User extends ActiveRecord implements IdentityInterface
 {

@@ -1,12 +1,9 @@
 <?php
-
-/*
- * This file is part of the mata project.
- *
- * (c) mata project <http://github.com/mata/>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+ 
+/**
+ * @link http://www.matacms.com/
+ * @copyright Copyright (c) 2015 Qi Interactive Limited
+ * @license http://www.matacms.com/license/
  */
 
 use yii\db\Query;
@@ -15,7 +12,7 @@ use yii\db\Migration;
 
 class m141222_110026_update_ip_field extends Migration
 {
-    public function up()
+    public function safeUp()
     {
         $users = (new Query())->from('{{%user}}')->select('id, registration_ip ip')->all();
 
@@ -35,7 +32,7 @@ class m141222_110026_update_ip_field extends Migration
         }
     }
 
-    public function down()
+    public function safeDown()
     {
         echo "m141222_110026_update_ip_field cannot be reverted.\n";
 
