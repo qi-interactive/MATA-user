@@ -27,6 +27,10 @@ php yii migrate/up --migrationPath=@vendor/mata/mata-user/migrations
 Changelog
 ---------
 
+## 1.0.1-alpha, May 2, 2015
+
+- Bug fix.
+
 ## 1.0.0-alpha, May 18, 2015
 
 - Initial release.
