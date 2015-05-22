@@ -471,7 +471,7 @@ class User extends ActiveRecord implements IdentityInterface
 
     public function __get($name) {
      if ($name == "created_at")
-        return date('Y-m-d H:i:s', strtotime($this->getAttribute($name)));
+        return date('Y-m-d H:i:s', $this->getAttribute($name));
 
     return parent::__get($name);
 }
