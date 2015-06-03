@@ -72,6 +72,10 @@ class User extends ActiveRecord implements IdentityInterface
         parent::init();
     }
 
+    public static function find() {
+        return \Yii::createObject(\yii\db\ActiveQuery::className(), [get_called_class()]);
+    }
+
     /**
      * @return bool Whether the user is confirmed or not.
      */

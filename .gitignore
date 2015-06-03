@@ -6,3 +6,4 @@ themes/classic/views/
 vendor
 composer.lock
 tests/codeception/app/config/db.php
+.DS_Store
