@@ -23,14 +23,19 @@ Installation
 php yii migrate/up --migrationPath=@vendor/mata/mata-user/migrations
 ```
 
-
 Changelog
 ---------
 
+## 1.0.2-alpha, June 3, 2015
+
+- Made User model use \yii\db\ActiveQuery
+
+
 ## 1.0.1-alpha, May 2, 2015
 
-- Bug fix.
+- Bug fix
+
 
 ## 1.0.0-alpha, May 18, 2015
 
-- Initial release.
+- Initial release
