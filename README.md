@@ -26,6 +26,10 @@ php yii migrate/up --migrationPath=@vendor/mata/mata-user/migrations
 Changelog
 ---------
 
+## TBD 
+
+- Removed 400 error from the login page when user already logged in
+
 ## 1.0.2-alpha, June 3, 2015
 
 - Made User model use \yii\db\ActiveQuery
