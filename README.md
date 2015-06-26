@@ -26,7 +26,7 @@ php yii migrate/up --migrationPath=@vendor/mata/mata-user/migrations
 Changelog
 ---------
 
-## TBD 
+## 1.0.2.1-alpha, June 26, 2015
 
 - Removed 400 error from the login page when user already logged in
 
