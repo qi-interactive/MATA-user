@@ -49,7 +49,7 @@ class SecurityController extends Controller
         'access' => [
         'class' => AccessControl::className(),
         'rules' => [
-        ['allow' => true, 'actions' => ['login', 'auth'], 'roles' => ['?']],
+        ['allow' => true, 'actions' => ['login', 'auth'], 'roles' => ['?', '@']],
         ['allow' => true, 'actions' => ['logout'], 'roles' => ['@']],
         ]
         ]
@@ -73,6 +73,12 @@ class SecurityController extends Controller
      */
     public function actionLogin()
     {
+
+        if (\Yii::$app->user->isGuest == false) {
+            return $this->redirect("/mata-cms");
+        }
+
+
         $model = \Yii::createObject(LoginForm::className());
 
         $this->performAjaxValidation($model);
