@@ -13,8 +13,6 @@ use yii\helpers\Html;
 use matacms\widgets\ActiveForm;
 use yii\helpers\Inflector;
 
-\matacms\theme\simple\assets\UserAsset::register($this);
-
 /**
  * @var yii\web\View                 $this
  * @var mata\user\models\User    $user
@@ -33,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
     <?php if(!empty($user->created_at)) : ?>
         <div class="user-registered-date">
-            Registered on <?php 
+            Registered on <?php
             echo  date('F d, Y H:i', strtotime($user->created_at));
             ?>
         </div>

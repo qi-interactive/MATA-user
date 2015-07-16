@@ -1,5 +1,5 @@
 <?php
- 
+
 /**
  * @link http://www.matacms.com/
  * @copyright Copyright (c) 2015 Qi Interactive Limited
@@ -102,6 +102,6 @@ class Bootstrap implements BootstrapInterface
 
             \Yii::$container->set('mata\user\Mailer', array_merge($defaults, $module->mailer));
         }
-        
+
     }
 }

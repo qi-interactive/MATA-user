@@ -10,10 +10,8 @@
  */
 
 use yii\helpers\Html;
-use matacms\widgets\ActiveForm;
+use mata\widgets\ActiveForm;
 use yii\helpers\Inflector;
-
-\matacms\theme\simple\assets\UserAsset::register($this);
 
 /**
  * @var $this  yii\web\View
@@ -52,8 +50,6 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="panel-heading">User Profile details </div>
             <div class="panel-body">
                 <?= $form->field($profileModel, 'name') ?>
-
-                <?= $form->field($profileModel, 'Avatar')->media() ?>
             </div>
         </div>
 

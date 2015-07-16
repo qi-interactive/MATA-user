@@ -1,5 +1,5 @@
 <?php
- 
+
 /**
  * @link http://www.matacms.com/
  * @copyright Copyright (c) 2015 Qi Interactive Limited
@@ -8,7 +8,7 @@
 
 namespace mata\user\models;
 
-use matacms\db\ActiveRecord;
+use mata\db\ActiveRecord;
 
 /**
  * This is the model class for table "profile".
@@ -95,5 +95,5 @@ class Profile extends ActiveRecord
         return \mata\media\models\Media::find()->forItem($this, 'Avatar')->one();
     }
 
-    
+
 }

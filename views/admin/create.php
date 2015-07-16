@@ -13,8 +13,6 @@ use yii\helpers\Html;
 use matacms\widgets\ActiveForm;
 use yii\helpers\Inflector;
 
-\matacms\theme\simple\assets\UserAsset::register($this);
-
 /**
  * @var yii\web\View              $this
  * @var mata\user\models\User $user
