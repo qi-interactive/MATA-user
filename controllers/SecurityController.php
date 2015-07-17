@@ -18,7 +18,7 @@ use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\authclient\ClientInterface;
 use yii\web\Response;
-use yii\widgets\ActiveForm;
+use mata\widgets\ActiveForm;
 
 /**
  * Controller that manages user authentication process.

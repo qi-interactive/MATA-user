@@ -10,9 +10,8 @@
  */
 
 /**
- * @var $this   yii\web\View
- * @var $title  string
- * @var $module mata\user\Module
+ * @var yii\web\View 			$this
+ * @var mata\user\Module 	$module
  */
 
 $this->title = $title;

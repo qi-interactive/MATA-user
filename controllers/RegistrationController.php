@@ -17,7 +17,7 @@ use mata\web\module\Controller;
 use yii\filters\AccessControl;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
-use yii\widgets\ActiveForm;
+use mata\widgets\ActiveForm;
 
 /**
  * RegistrationController is responsible for all registration process, which includes registration of a new account,

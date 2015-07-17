@@ -10,9 +10,9 @@
  */
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use mata\widgets\ActiveForm;
 
-/**
+/*
  * @var yii\web\View                    $this
  * @var mata\user\models\ResendForm $model
  */
@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?php $form = ActiveForm::begin([
                     'id'                     => 'resend-form',
                     'enableAjaxValidation'   => true,
-                    'enableClientValidation' => false
+                    'enableClientValidation' => false,
                 ]); ?>
 
                 <?= $form->field($model, 'email')->textInput(['autofocus' => true]) ?>

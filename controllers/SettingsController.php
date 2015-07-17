@@ -21,7 +21,7 @@ use yii\filters\VerbFilter;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
-use yii\widgets\ActiveForm;
+use mata\widgets\ActiveForm;
 
 /**
  * SettingsController manages updating user settings (e.g. profile, email and password).

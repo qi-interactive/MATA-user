@@ -10,11 +10,11 @@
  */
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use mata\widgets\ActiveForm;
 
-/**
+/*
  * @var yii\web\View $this
- * @var yii\widgets\ActiveForm $form
+ * @var mata\widgets\ActiveForm $form
  * @var mata\user\models\RecoveryForm $model
  */
 
@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?php $form = ActiveForm::begin([
                     'id'                     => 'password-recovery-form',
                     'enableAjaxValidation'   => true,
-                    'enableClientValidation' => false
+                    'enableClientValidation' => false,
                 ]); ?>
 
                 <?= $form->field($model, 'password')->passwordInput() ?>
