@@ -1,5 +1,5 @@
 <?php
- 
+
 /**
  * @link http://www.matacms.com/
  * @copyright Copyright (c) 2015 Qi Interactive Limited
@@ -108,4 +108,6 @@ class Module extends BaseModule
             ]
             ];
     }
+
+
 }

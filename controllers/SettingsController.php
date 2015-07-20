@@ -1,5 +1,5 @@
 <?php
- 
+
 /**
  * @link http://www.matacms.com/
  * @copyright Copyright (c) 2015 Qi Interactive Limited
@@ -21,9 +21,7 @@ use yii\filters\VerbFilter;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
-use yii\widgets\ActiveForm;
-use matacms\base\MessageEvent;
-use matacms\filters\NotificationFilter;
+use mata\widgets\ActiveForm;
 
 /**
  * SettingsController manages updating user settings (e.g. profile, email and password).
@@ -70,9 +68,6 @@ class SettingsController extends Controller
                         'roles'   => ['@']
                     ],
                 ]
-            ],
-            'notifications' => [
-                'class' => NotificationFilter::className(),
             ]
         ];
     }
@@ -147,7 +142,7 @@ class SettingsController extends Controller
                 $this->trigger('EVENT_MODEL_CREATED', new MessageEvent('Your account has been updated'));
                 return $this->refresh();
             }
-                       
+
         }
 
         return $this->render('account', [

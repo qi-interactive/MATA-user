@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-use yii\widgets\ActiveForm;
+use mata\widgets\ActiveForm;
 use yii\helpers\Html;
 
 /**
  * @var yii\web\View $this
- * @var yii\widgets\ActiveForm $form
+ * @var mata\widgets\ActiveForm $form
  * @var mata\user\models\LoginForm $model
  * @var string $action
  */

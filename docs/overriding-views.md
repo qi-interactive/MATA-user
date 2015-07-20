@@ -34,11 +34,11 @@ and paste in the following code:
 ```php
 <?php
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use mata\widgets\ActiveForm;
 
 /**
  * @var yii\web\View              $this
- * @var yii\widgets\ActiveForm    $form
+ * @var mata\widgets\ActiveForm    $form
  * @var mata\user\models\User $user
  */
 

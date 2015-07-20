@@ -10,14 +10,11 @@
  */
 
 use yii\helpers\Html;
-use matacms\widgets\ActiveForm;
-use yii\helpers\Inflector;
+use mata\widgets\ActiveForm;
 
-\matacms\theme\simple\assets\UserAsset::register($this);
-
-/**
+/*
  * @var $this  yii\web\View
- * @var $form  yii\widgets\ActiveForm
+ * @var $form  mata\widgets\ActiveForm
  * @var $model mata\user\models\SettingsForm
  */
 
@@ -25,50 +22,47 @@ $this->title = Yii::t('user', 'Account settings');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<div class="account-update">
+<?= $this->render('/_alert', ['module' => Yii::$app->getModule('user')]) ?>
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <?php $form = ActiveForm::begin([
-        'id' => 'account-form',
-        'enableAjaxValidation' => true,
-        'enableClientValidation' => false,
-        ]); ?>
-
-        <div class="panel panel-default">
-            <div class="panel-heading">Account details</div>
-            <div class="panel-body">
-                <?= $form->field($accountModel, 'email') ?>
-
-                <?= $form->field($accountModel, 'username') ?>
-
-                <?= $form->field($accountModel, 'new_password')->passwordInput() ?>
-
-                <?= $form->field($accountModel, 'current_password')->passwordInput() ?>
-            </div>
-        </div>
-
-        <div class="panel panel-default">
-            <div class="panel-heading">User Profile details </div>
-            <div class="panel-body">
-                <?= $form->field($profileModel, 'name') ?>
-
-                <?= $form->field($profileModel, 'Avatar')->media() ?>
-            </div>
-        </div>
-
-
-        <?= $form->submitButton($profileModel) ?>
-
-        <?php ActiveForm::end(); ?>
+<div class="row">
+    <div class="col-md-3">
+        <?= $this->render('_menu') ?>
     </div>
+    <div class="col-md-9">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <?= Html::encode($this->title) ?>
+            </div>
+            <div class="panel-body">
+                <?php $form = ActiveForm::begin([
+                    'id'          => 'account-form',
+                    'options'     => ['class' => 'form-horizontal'],
+                    'fieldConfig' => [
+                        'template'     => "{label}\n<div class=\"col-lg-9\">{input}</div>\n<div class=\"col-sm-offset-3 col-lg-9\">{error}\n{hint}</div>",
+                        'labelOptions' => ['class' => 'col-lg-3 control-label'],
+                    ],
+                    'enableAjaxValidation'   => true,
+                    'enableClientValidation' => false,
+                ]); ?>
 
-    <script>
+                <?= $form->field($model, 'email') ?>
 
-      parent.mata.simpleTheme.header
-      .setText('YOU\'RE IN <?= Inflector::camel2words($this->context->module->id) ?> MODULE')
-      .hideBackToListView()
-      .hideVersions()
-      .show();
+                <?= $form->field($model, 'username') ?>
 
-  </script>
+                <?= $form->field($model, 'new_password')->passwordInput() ?>
+
+                <hr />
+
+                <?= $form->field($model, 'current_password')->passwordInput() ?>
+
+                <div class="form-group">
+                    <div class="col-lg-offset-3 col-lg-9">
+                        <?= Html::submitButton(Yii::t('user', 'Save'), ['class' => 'btn btn-block btn-success']) ?><br>
+                    </div>
+                </div>
+
+                <?php ActiveForm::end(); ?>
+            </div>
+        </div>
+    </div>
+</div>

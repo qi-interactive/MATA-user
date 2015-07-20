@@ -1,5 +1,5 @@
 <?php
- 
+
 /**
  * @link http://www.matacms.com/
  * @copyright Copyright (c) 2015 Qi Interactive Limited
@@ -18,7 +18,7 @@ use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\authclient\ClientInterface;
 use yii\web\Response;
-use yii\widgets\ActiveForm;
+use mata\widgets\ActiveForm;
 
 /**
  * Controller that manages user authentication process.
@@ -73,11 +73,6 @@ class SecurityController extends Controller
      */
     public function actionLogin()
     {
-
-        if (\Yii::$app->user->isGuest == false) {
-            return $this->redirect("/mata-cms");
-        }
-
 
         $model = \Yii::createObject(LoginForm::className());
 

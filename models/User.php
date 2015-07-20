@@ -1,5 +1,5 @@
 <?php
- 
+
 /**
  * @link http://www.matacms.com/
  * @copyright Copyright (c) 2015 Qi Interactive Limited
@@ -14,7 +14,7 @@ use mata\user\Mailer;
 use mata\user\Module;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
-use matacms\db\ActiveRecord;
+use mata\db\ActiveRecord;
 use yii\log\Logger;
 use yii\web\IdentityInterface;
 
@@ -463,6 +463,11 @@ class User extends ActiveRecord implements IdentityInterface
     public static function findIdentityByAccessToken($token, $type = null) {
         throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
     }
+
+    public function getAuths()
+       {
+           return $this->hasMany(Auth::className(), ['user_id' => 'id']);
+       }
 
     public function getLabel() {
         $profile = $this->getProfile()->one();

@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-use yii\helpers\Html;
-use yii\widgets\ActiveForm;
 use mata\user\widgets\Connect;
+use yii\helpers\Html;
+use mata\widgets\ActiveForm;
 
 /**
  * @var yii\web\View                   $this
@@ -57,8 +57,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= Html::a(Yii::t('user', 'Didn\'t receive confirmation message?'), ['/user/registration/resend']) ?>
             </p>
         <?php endif ?>
+        <?php if ($module->enableRegistration): ?>
+            <p class="text-center">
+                <?= Html::a(Yii::t('user', 'Don\'t have an account? Sign up!'), ['/user/registration/register']) ?>
+            </p>
+        <?php endif ?>
         <?= Connect::widget([
-            'baseAuthUrl' => ['/user/security/auth']
+            'baseAuthUrl' => ['/user/security/auth'],
         ]) ?>
     </div>
 </div>

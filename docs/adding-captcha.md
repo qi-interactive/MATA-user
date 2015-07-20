@@ -56,12 +56,12 @@ form, just copy and paste following code into newly created view file.
     <?php
 
     use yii\helpers\Html;
-    use yii\widgets\ActiveForm;
+    use mata\widgets\ActiveForm;
     use yii\captcha\Captcha;
 
     /**
      * @var yii\web\View $this
-     * @var yii\widgets\ActiveForm $form
+     * @var mata\widgets\ActiveForm $form
      * @var app\models\RegistrationForm $model
      */
     $this->title = Yii::t('user', 'Sign up');

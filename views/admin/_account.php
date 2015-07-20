@@ -12,10 +12,9 @@
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 
-/**
- * @var yii\web\View 					$this
- * @var mata\user\models\User 		$user
- * @var mata\user\models\Profile 	$profile
+/*
+ * @var yii\web\View $this
+ * @var mata\user\models\User $user
  */
 
 ?>
@@ -24,7 +23,7 @@ use yii\helpers\Html;
 
 <?php $form = ActiveForm::begin([
     'layout' => 'horizontal',
-    'enableAjaxValidation' => true,
+    'enableAjaxValidation'   => true,
     'enableClientValidation' => false,
     'fieldConfig' => [
         'horizontalCssClasses' => [
@@ -33,13 +32,7 @@ use yii\helpers\Html;
     ],
 ]); ?>
 
-<?= $form->field($profile, 'name') ?>
-<?= $form->field($profile, 'public_email') ?>
-<?= $form->field($profile, 'website') ?>
-<?= $form->field($profile, 'location') ?>
-<?= $form->field($profile, 'gravatar_email') ?>
-<?= $form->field($profile, 'bio')->textarea() ?>
-
+<?= $this->render('_user', ['form' => $form, 'user' => $user]) ?>
 
 <div class="form-group">
     <div class="col-lg-offset-3 col-lg-9">
