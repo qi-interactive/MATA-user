@@ -12,7 +12,7 @@ This module is based on the excellent [Yii2 User by dektrium](https://github.com
 Installation
 ------------
 
-- Add the module using composer: 
+- Add the module using composer:
 
 ```json
 "mata/mata-user": "~1.0.0"
@@ -25,6 +25,10 @@ php yii migrate/up --migrationPath=@vendor/mata/mata-user/migrations
 
 Changelog
 ---------
+
+## 1.0.3-alpha, July 20, 2015
+
+- Removed dependency on matacms
 
 ## 1.0.2.1-alpha, June 26, 2015
 
