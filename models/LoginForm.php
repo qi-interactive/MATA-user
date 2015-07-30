@@ -1,5 +1,5 @@
 <?php
- 
+
 /**
  * @link http://www.matacms.com/
  * @copyright Copyright (c) 2015 Qi Interactive Limited
@@ -51,7 +51,7 @@ class LoginForm extends Model
     public function attributeLabels()
     {
         return [
-        'login'      => \Yii::t('user', 'Username'),
+        'login'      => \Yii::t('user', 'Username / Email'),
         'password'   => \Yii::t('user', 'Password'),
         'rememberMe' => \Yii::t('user', 'Remember me'),
         ];
