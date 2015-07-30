@@ -72,7 +72,7 @@ class RecoveryController extends Controller
         $this->performAjaxValidation($model);
 
         if ($model->load(\Yii::$app->request->post()) && $model->sendRecoveryMessage()) {
-            return $this->redirect(['request']);
+            return $this->redirect(['security/login']);
         }
 
         return $this->render('request', [
