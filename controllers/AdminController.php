@@ -37,7 +37,7 @@ class AdminController extends Controller
      * @param Finder $finder
      * @param array $config
      */
-    public function __construct($id, $module, $finder, $config = [])
+    public function __construct($id, $module, Finder $finder, $config = [])
     {
         $this->finder = $finder;
         parent::__construct($id, $module, $config);
