@@ -1,5 +1,5 @@
 <?php
- 
+
 /**
  * @link http://www.matacms.com/
  * @copyright Copyright (c) 2015 Qi Interactive Limited
@@ -37,7 +37,7 @@ class AdminController extends Controller
      * @param Finder $finder
      * @param array $config
      */
-    public function __construct($id, $module, Finder $finder, $config = [])
+    public function __construct($id, $module, $finder, $config = [])
     {
         $this->finder = $finder;
         parent::__construct($id, $module, $config);
@@ -111,7 +111,7 @@ class AdminController extends Controller
                 $dataProvider->query->join('INNER JOIN', 'arhistory_revision', 'arhistory_revision.DocumentId = CONCAT(:class, '.$aliasWithPk.')', [':class' => $parentClass->name . '-']);
                 $dataProvider->query->andWhere('arhistory_revision.Revision = (SELECT MAX(Revision) FROM `arhistory_revision` WHERE arhistory_revision.`DocumentId` = CONCAT(:class, '.$aliasWithPk.'))', [':class' => $parentClass->name . '-']);
                 $dataProvider->query->orderBy('arhistory_revision.DateCreated DESC');
-            }   
+            }
         }
 
         $dataProvider->setSort($sort);

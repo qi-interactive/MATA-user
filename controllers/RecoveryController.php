@@ -1,5 +1,5 @@
 <?php
- 
+
 /**
  * @link http://www.matacms.com/
  * @copyright Copyright (c) 2015 Qi Interactive Limited
@@ -36,6 +36,7 @@ class RecoveryController extends Controller
      */
     public function __construct($id, $module, Finder $finder, $config = [])
     {
+        $this->layout = "@matacms/views/layouts/login";
         $this->finder = $finder;
         parent::__construct($id, $module, $config);
     }
@@ -72,10 +73,7 @@ class RecoveryController extends Controller
         $this->performAjaxValidation($model);
 
         if ($model->load(\Yii::$app->request->post()) && $model->sendRecoveryMessage()) {
-            return $this->render('/message', [
-                'title'  => \Yii::t('user', 'Recovery message sent'),
-                'module' => $this->module,
-            ]);
+            return $this->redirect(['security/login']);
         }
 
         return $this->render('request', [
