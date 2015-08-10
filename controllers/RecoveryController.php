@@ -99,10 +99,7 @@ class RecoveryController extends Controller
 
         if ($token === null || $token->isExpired || $token->user === null) {
             \Yii::$app->session->setFlash('danger', \Yii::t('user', 'Recovery link is invalid or expired. Please try requesting a new one.'));
-            return $this->render('/message', [
-                'title'  => \Yii::t('user', 'Invalid or expired link'),
-                'module' => $this->module,
-            ]);
+            return $this->redirect(['request']);
         }
 
         $model = \Yii::createObject([
@@ -113,10 +110,7 @@ class RecoveryController extends Controller
         $this->performAjaxValidation($model);
 
         if ($model->load(\Yii::$app->getRequest()->post()) && $model->resetPassword($token)) {
-            return $this->render('/message', [
-                'title'  => \Yii::t('user', 'Password has been changed'),
-                'module' => $this->module,
-            ]);
+            return $this->redirect(['security/login']);
         }
 
         return $this->render('reset', [
