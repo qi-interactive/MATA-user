@@ -26,6 +26,10 @@ php yii migrate/up --migrationPath=@vendor/mata/mata-user/migrations
 Changelog
 ---------
 
+## 1.0.4-alpha, August 21, 2015
+
+- Fixed password recovery functionality
+
 ## 1.0.3-alpha, July 20, 2015
 
 - Removed dependency on matacms
