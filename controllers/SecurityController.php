@@ -73,6 +73,7 @@ class SecurityController extends Controller
      */
     public function actionLogin()
     {
+        $this->layout = "@matacms/views/layouts/login";
 
         $model = \Yii::createObject(LoginForm::className());
 

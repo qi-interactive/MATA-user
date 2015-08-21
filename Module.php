@@ -83,7 +83,7 @@ class Module extends BaseModule
         '<action:(register|resend)>'  => 'registration/<action>',
         'confirm/<id:\d+>/<code:\w+>' => 'registration/confirm',
         'forgot'                      => 'recovery/request',
-        'recover/<id:\d+>/<code:\w+>' => 'recovery/reset',
+        'recover/<id:\d+>/<code:([0-9a-zA-Z\-_=]+)>' => 'recovery/reset',
         'settings/<action:\w+>'       => 'settings/<action>'
     ];
 
